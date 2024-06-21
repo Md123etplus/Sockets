@@ -1,10 +1,11 @@
-# Application de Messagerie Utilisant des Sockets
+# Application des Sockets dans la gestion des contacts
 
 ## Fonctionnalités
 
 - **Connexion au Serveur :**
   - Le client entre un identifiant (login) et un mot de passe.
   - Gestion de jusqu'à 3 tentatives pour le mot de passe incorrect.
+  - Stockage des données des users dans un fichier texte (`compte.txt`) .
 
 - **Menus :**
   - **Administrateur :**
@@ -14,7 +15,7 @@
 
 - **Transmission de Données :**
   - Saisie d'informations par le client et envoi au serveur.
-  - Stockage des données reçues dans un fichier texte (`contacts.txt`).
+  - Stockage des données reçues dans un fichier texte (`Contact.txt`).
 
 ## Serveur
 
@@ -40,3 +41,11 @@
 - Mohamed Amine Ait Jaakike
 - Saad Barhrouj
 - Dahman Salma
+
+  ## Utilisation
+(`gcc server2.c -o server -lws2_32`) pour compiler cote serveur
+  server
+(`gcc client2.c -o client -lws2_32`) pour compiler cote client
+  client
+  Et la connexion passe sur le meme pc, si on veut le faire entre deux pcs ou plus connecte au meme reseau local on change 
+  `socketAddress.sin_addr.s_addr = inet_addr("127.0.0.1"); en l'adresse ip du host.`
