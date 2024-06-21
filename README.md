@@ -1,9 +1,9 @@
 # Sockets
 
-#Application Côté Client
+Application Côté Client
 L'application client effectue les tâches suivantes :
 
-##Connexion au Socket Serveur :
+Connexion au Socket Serveur :
 
 Le client entre un identifiant (login) et un mot de passe.
 Si le mot de passe est incorrect, le client peut réessayer jusqu'à 3 fois avant que le système ne s'arrête.
