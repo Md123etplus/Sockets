@@ -1,51 +1,42 @@
-# Sockets
-# Application Côté Client
-# L'application client effectue les tâches suivantes :
+# Application de Messagerie Utilisant des Sockets
 
-## Connexion au Socket Serveur :
+## Fonctionnalités
 
-# Le client entre un identifiant (login) et un mot de passe.
-# Si le mot de passe est incorrect, le client peut réessayer jusqu'à 3 fois avant que le système ne s'arrête.
-# Si le mot de passe est correct, le client récupère le profil de l'utilisateur (Administrateur ou Invité).
+- **Connexion au Serveur :**
+  - Le client entre un identifiant (login) et un mot de passe.
+  - Gestion de jusqu'à 3 tentatives pour le mot de passe incorrect.
 
-# Menu Administrateur :
+- **Menus :**
+  - **Administrateur :**
+    - Accès complet aux fonctionnalités d'administration.
+  - **Invité :**
+    - Fonctionnalités restreintes à la consultation et à la recherche de contacts.
 
-# Une fois connecté en tant qu'administrateur, un menu s'affiche permettant à l'administrateur d'effectuer diverses tâches.
+- **Transmission de Données :**
+  - Saisie d'informations par le client et envoi au serveur.
+  - Stockage des données reçues dans un fichier texte (`contacts.txt`).
 
-# Menu Invité :
+## Serveur
 
-# Les invités peuvent uniquement consulter et rechercher des contacts.
+### Fonctionnalités
 
-# Transmission de Données :
+- **Gestion des Connexions :**
+  - Attente et gestion des connexions entrantes des clients.
 
-# Le client peut saisir des informations et les envoyer au serveur.
-# Le serveur reçoit les données et les stocke dans un fichier texte (contacts.txt).
+- **Authentification :**
+  - Vérification des identifiants et des mots de passe des clients.
+  - Affichage de menus adaptés selon le type d'utilisateur (administrateur ou invité).
 
-# Application Côté Serveur
-# L'application serveur effectue les tâches suivantes :
+- **Historique des Activités :**
+  - Affichage en temps réel des activités des clients.
 
-# Gestion des Connexions :
+- **Gestion des Contacts :**
+  - Ajout, modification, suppression et recherche de contacts.
+  - Traitement des requêtes des clients.
 
-# Le serveur est prêt à recevoir des connexions de clients.
+## Contributeurs
 
-# Authentification des Clients :
-
-# Le serveur vérifie l'identifiant et le mot de passe des clients.
-# Si le client est un administrateur, le menu approprié s'affiche.
-# Si le client est un invité, il peut seulement consulter et rechercher des contacts. Le menu est personnalisé en fonction du profil de l'utilisateur.
-
-# Affichage de l'Historique :
-
-# Le serveur affiche l'historique instantané des clients.
-
-# Gestion des Contacts :
-
-# Ajouter, modifier, supprimer et rechercher des contacts.
-# Le serveur affiche toutes les requêtes reçues et effectue le traitement demandé par le client.
-
-# Contributeurs:
-
-# Dembele Moussa
-# Mohamed Amine Ait Jaakike
-# Saad Barhrouj
-# Dahman Salma
+- Dembele Moussa
+- Mohamed Amine Ait Jaakike
+- Saad Barhrouj
+- Dahman Salma
