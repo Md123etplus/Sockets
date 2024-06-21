@@ -42,10 +42,17 @@
 - Saad Barhrouj
 - Dahman Salma
 
-  ## Utilisation
+## Utilisation
+- sous windows ou linux
 (`gcc server2.c -o server -lws2_32`) pour compiler cote serveur
   server
 (`gcc client2.c -o client -lws2_32`) pour compiler cote client
   client
   Et la connexion passe sur le meme pc, si on veut le faire entre deux pcs ou plus connecte au meme reseau local on change 
   `socketAddress.sin_addr.s_addr = inet_addr("127.0.0.1"); en l'adresse ip du host.`
+- sous d'autres systemes (utilisation de docker) 127.0.0.1
+  `docker pull moussad1/socket:v4`
+  `docker run moussad1/socket:v4`
+  dans un autre terminal
+  `docker exec -it ...(code d'exec du 1er terminal)`
+  
