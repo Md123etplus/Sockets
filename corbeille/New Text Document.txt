@@ -1,0 +1,109 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#ifdef _WIN32
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#else
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <unistd.h> // Pour la fonction close()
+#endif
+
+#define LISTENING_PORT 5094
+#define BUFFER_SIZE 1024
+#define CONNECTION_HOST "127.0.0.1" // Adresse IP du serveur
+
+int main(void)
+{
+    // Initialisation winSock
+#ifdef _WIN32
+    WSADATA wsa;
+    if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
+    {
+        fprintf(stderr, "(CLIENT) Echec d'initialisation de Windows\n");
+        exit(1);
+    }
+#endif
+
+    // Creation du Socket
+    int socketFD = socket(AF_INET, SOCK_STREAM, 0);
+    if (socketFD == -1)
+    {
+        fprintf(stderr, "(CLIENT) Echec d'initialisation de socket\n");
+        exit(1);
+    }
+
+    // Configuration de liaison du Socket
+    struct sockaddr_in socketAddress;
+    socketAddress.sin_family = AF_INET;
+    socketAddress.sin_port = htons(LISTENING_PORT);
+    socketAddress.sin_addr.s_addr = inet_addr(CONNECTION_HOST);
+    if (socketAddress.sin_addr.s_addr == INADDR_NONE)
+    {
+        fprintf(stderr, "(CLIENT) Adresse invalide\n");
+        exit(1);
+    }
+
+    // Connexion au serveur
+    int connectionStatus = connect(socketFD, (struct sockaddr *)&socketAddress, sizeof(socketAddress));
+    if (connectionStatus == -1)
+    {
+        fprintf(stderr, "(CLIENT) Echec de la connexion au serveur : %d\n", errno);
+        perror("connect");
+        exit(1);
+    }
+    printf("(CLIENT) Connexion reussie au serveur \n");
+
+    // Saisie du login et du mot de passe
+    char login[255], password[255];
+    printf("Login: ");
+    scanf("%s", login);
+    printf("Password: ");
+    scanf("%s", password);
+
+    // Envoi du login et du mot de passe au serveur
+    char message[BUFFER_SIZE];
+    sprintf(message, "%s:%s", login, password);
+    int sentBytes = send(socketFD, message, strlen(message), 0);
+    if (sentBytes == -1)
+    {
+        fprintf(stderr, "(CLIENT) Echec d'envoi du message au serveur.\n");
+        exit(1);
+    }
+
+    // Réception de la réponse du serveur
+    char buffer[BUFFER_SIZE] = {0};
+    int receivedBytes = recv(socketFD, buffer, BUFFER_SIZE, 0);
+    if (receivedBytes == -1)
+    {
+        fprintf(stderr, "(CLIENT) Echec de réception du message du serveur.\n");
+        exit(1);
+    }
+
+    if(strcmp(buffer,"nope")==0){
+        printf("\nVous n'etes pas dans la base de donnees.");
+    }else if(strcmp(buffer,"echec")==0){
+        printf("Login: ");
+        scanf("%s", login);
+        printf("Password: ");
+        scanf("%s", password);
+        // Envoi du login et du mot de passe au serveur
+        char message[BUFFER_SIZE];
+        sprintf(message, "%s:%s", login, password);
+        int sentBytes = send(socketFD, message, strlen(message), 0);
+    }else{
+        printf("Vous etes : %s\n", buffer);
+    }
+
+    // Fermeture du socket et nettoyage des ressources
+#ifdef _WIN32
+    closesocket(socketFD);
+    WSACleanup();
+#else
+    close(socketFD);
+#endif
+
+    return 0;
+}

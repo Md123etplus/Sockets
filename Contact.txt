@@ -1,0 +1,5 @@
+dembele	moussa	1000	md@gmail.com	hamdalaye	bamako	mali
+barhrouj	0	1000	md@gmail.com	hamdalaye	bamako	mali
+saad	0	1000	md@gmail.com	hamdalaye	bamako	mali
+moussa	dembele	1233	qqq	ww	ww	ww
+test	tst	123	ww	ww	w	w
